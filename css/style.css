@@ -1,0 +1,503 @@
+
+/* 1. CSS Variables */
+:root {
+  --bg: #f4f2ed;
+  --surface: #ffffff;
+  --dark: #111111;
+  --text: #1a1a1a;
+  --muted: #6d6d6d;
+  --border: #d9d6cf;
+  --accent: #c76a3c;
+
+  --container: 1400px;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 7rem;
+
+  --radius: 0;
+  --transition: 300ms ease;
+
+  /* Typography Scale */
+  --font-base: "DM Sans", sans-serif
+  --text-base: clamp(1rem, 1.2vw, 1.125rem);
+  --text-large: clamp(2rem, 5vw, 4rem);
+  --text-huge: clamp(3rem, 10vw, 9rem);
+}
+
+/* 2. Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* 3. Typography */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+}
+
+.hero-title {
+  font-size: var(--text-huge);
+  margin-bottom: var(--space-md);
+  font-size: clamp(3rem, 10vw, 9rem);
+  text-transform: capitalize;
+}
+
+.large-heading {
+  font-size: var(--text-large);
+  margin-bottom: var(--space-md);
+  text-transform: capitalize;
+}
+
+.huge-text {
+  font-size: clamp(2rem, 6vw, 5rem);
+}
+
+.section-heading {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-sm);
+}
+
+.eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: var(--space-sm);
+  color: var(--muted);
+}
+
+/* 4. Layout & Container */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.section-padding {
+  padding: var(--space-xl) 0;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.mt-md {
+  margin-top: var(--space-md);
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-dark {
+  background-color: var(--dark);
+  color: var(--bg);
+}
+
+/* 5. Header & Navigation */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: var(--space-sm) 0;
+  transition: background-color var(--transition), border-bottom var(--transition);
+}
+
+.site-header.scrolled {
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  max-width: 100px;
+}
+.logo img{
+  width: 100%;
+  height: auto;
+}
+
+
+.site-nav {
+  display: none;
+}
+
+.menu-toggle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 101;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  position: relative;
+  transition: var(--transition);
+}
+
+.hamburger::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 0;
+}
+
+.hamburger::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+}
+
+.menu-open .hamburger {
+  background: transparent;
+}
+
+.menu-open .hamburger::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.menu-open .hamburger::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+/* Mobile Menu Fullscreen */
+.site-nav.is-active {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg);
+  padding: var(--space-xl) var(--space-md);
+  z-index: 99;
+  justify-content: space-between;
+}
+
+.nav-links li {
+  margin-bottom: var(--space-md);
+}
+
+.nav-links a {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* 6. Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  border: 1px solid var(--text);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--text);
+}
+
+.btn-primary.inverse {
+  background: var(--bg);
+  color: var(--dark);
+  border-color: var(--bg);
+}
+
+.btn-primary.inverse:hover {
+  background: transparent;
+  color: var(--bg);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* 7. Specific Sections */
+.hero {
+  padding-top: calc(var(--space-xl) + 80px);
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.hero-visual {
+  margin-top: var(--space-lg);
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--border);
+}
+
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.service-number {
+  font-size: 1.5rem;
+  color: var(--muted);
+  margin-bottom: var(--space-xs);
+}
+
+.service-arrow {
+  margin-top: var(--space-sm);
+  transition: transform var(--transition);
+}
+
+.service-item:hover .service-arrow {
+  transform: translateX(10px);
+}
+
+.methodology-steps {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.step-num {
+  display: block;
+  font-size: 3rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  line-height: 1;
+}
+
+.quote-section {
+  padding: var(--space-xl) 0;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.huge-quote {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  max-width: 1000px;
+  margin: 0 auto var(--space-md);
+  line-height: 1.2;
+  text-transform: capitalize;
+}
+
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.final-cta .container {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.2;
+}
+
+.cta-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 8. Footer */
+.site-footer {
+  padding: var(--space-xl) 0 var(--space-md);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* 9. Utility & Animation States */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.reveal-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+  transform-origin: top;
+}
+
+.reveal-image.is-visible::after {
+  transform: scaleY(0);
+}
+
+.timeline-step{
+  padding: var(--space-md);
+}
+
+.projects-grid, .filter-nav{
+  padding: var(--space-md);
+}
+.contact-info, .contact-form{
+  padding: var(--space-md);
+}
+#enquiry-form label{
+  text-transform: capitalize;
+}
+
+#privacySection, #termsSection {
+  padding: var(--space-md);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-up {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-image::after {
+    display: none;
+  }
+}
